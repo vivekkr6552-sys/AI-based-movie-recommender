@@ -6,8 +6,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 def load_and_preprocess():  
-    # Relative path definition for project portability
+    # Get the directory where model.py is located
     base_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Dynamically build relative paths to CSV files
     movies_path = os.path.join(base_dir, 'data', 'tmdb', 'tmdb_5000_movies.csv')
     credits_path = os.path.join(base_dir, 'data', 'tmdb', 'tmdb_5000_credits.csv')
 
@@ -15,7 +17,7 @@ def load_and_preprocess():
     movies = pd.read_csv(movies_path)
     credits = pd.read_csv(credits_path)
     
-    # Merge datasets on title
+    # Merge on title
     movies = movies.merge(credits, on='title')
     
     # Extract relevant columns
